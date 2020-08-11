@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navView.setNavigationItemSelectedListener(this);
 
         // for bottom navigation
-        //BottomNavigationView bn = findViewById(R.id.bottomNav);
-        //bn.setOnNavigationItemSelectedListener(this);
+        BottomNavigationView bn = findViewById(R.id.bottomNav);
+        bn.setOnNavigationItemSelectedListener(this);
 
 
     }

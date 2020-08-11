@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">      <!-- select one item from this menu group-->
+        <item android:id="@+id/profile"
+            android:icon="@drawable/ic_dp"
+            android:title="Profile"/>
+
+        <item android:id="@+id/notifications"
+            android:icon="@drawable/ic_notifications"
+            android:title="Notification"/>
+
+        <item android:id="@+id/settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings"/>
+
+
+    </group>
+
+    <item android:title="Others">
+        <menu>
+            <item android:id="@+id/share"
+                android:icon="@drawable/ic_share"
+                android:title="Share app"/>
+            <item android:id="@+id/reportbug"
+                android:icon="@drawable/ic_bug"
+                android:title="Report a bug"/>
+            <item android:id="@+id/about"
+                android:icon="@drawable/ic_about"
+                android:title="About"/>
+            <item android:id="@+id/support"
+                android:icon="@drawable/ic_support"
+                android:title="Support Devs"/>
+
+        </menu>
+    </item>
+
+</menu>

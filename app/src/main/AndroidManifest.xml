@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignupActivity"></activity>
+
         <activity
             android:name=".splashScreen"
             android:theme="@style/AppFullScreenTheme">
@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".loginActivity"
+            android:theme="@style/AppFullScreenTheme"></activity>
+
         <activity
             android:name=".MainActivity"
             android:theme="@style/NoActionBar">

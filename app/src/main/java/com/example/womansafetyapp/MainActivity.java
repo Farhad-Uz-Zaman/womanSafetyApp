@@ -39,10 +39,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // for nav.drawer fragments
         navView.setNavigationItemSelectedListener(this);
 
-        // for bottom navigation
+        //for bottom navigation
         BottomNavigationView bn = findViewById(R.id.bottomNav);
         bn.setOnNavigationItemSelectedListener(this);
 
+        if (savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new home()).commit();
+
+        }
 
     }
 
@@ -94,13 +98,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
             case R.id.nav_home:
-                Toast.makeText(this, "home", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new home()).commit();
                 break;
             case R.id.dash:
-                Toast.makeText(this, "dash", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new dashboard()).commit();
                 break;
             case R.id.set:
-                Toast.makeText(this, "set", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new settings()).commit();
                 break;
 
 

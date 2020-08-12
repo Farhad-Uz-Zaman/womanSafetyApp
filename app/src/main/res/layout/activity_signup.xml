@@ -93,6 +93,7 @@
                 android:textStyle="bold"
                 android:textColorHint="#ff0000"
                 android:layout_marginLeft="40dp"
+                android:inputType="textPassword"
 
                 />
 
@@ -107,6 +108,7 @@
                 android:textStyle="bold"
                 android:textColorHint="#ff0000"
                 android:layout_marginLeft="40dp"
+                android:inputType="textPassword"
 
                 />
 
@@ -140,6 +142,8 @@
                 android:text="SIGN UP"
                 android:textSize="24sp"
                 android:textColor="#FF0000"
+                android:onClick="signup"
+
 
 
 

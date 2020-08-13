@@ -57,8 +57,17 @@ public class dashboard extends Fragment  {
                 String name = username.getText().toString();
                 String detail = details.getText().toString();
 
-                reportManual rm = new reportManual(name,detail);
-                dr.child(name).setValue(rm);
+                if (!name.isEmpty() && !detail.isEmpty()){
+                    reportManual rm = new reportManual(name,detail);
+                    dr.child(name).setValue(rm);
+                    Toast.makeText(getActivity(), "report received", Toast.LENGTH_SHORT).show();
+                     username.setText("");
+                     details.setText("");
+                }
+                else if (name.isEmpty() || detail.isEmpty()){
+                    Toast.makeText(getActivity(), "fill sections properly", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });

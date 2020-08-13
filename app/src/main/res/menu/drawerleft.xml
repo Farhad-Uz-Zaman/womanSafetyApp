@@ -23,7 +23,7 @@
                 android:icon="@drawable/ic_share"
                 android:title="Share app"/>
             <item android:id="@+id/reportbug"
-                android:icon="@drawable/ic_bug"
+                android:icon="@drawable/ic_bugreport"
                 android:title="Report a bug"/>
             <item android:id="@+id/about"
                 android:icon="@drawable/ic_about"

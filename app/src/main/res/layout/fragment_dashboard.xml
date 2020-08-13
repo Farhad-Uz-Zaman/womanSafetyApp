@@ -3,12 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".dashboard">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf = "parent">
+    <RelativeLayout
         android:layout_height="match_parent"
-        android:text="dashboard section" />
+        android:layout_width="match_parent">
 
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="enter name"
+        android:textSize="19sp"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+    <EditText
+        android:id="@+id/reportDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Details"
+        android:textSize="19sp"
+        android:layout_below="@+id/userName"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reportDetails"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custom_button"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="80dp"
+            android:text="Send"
+            android:textSize="24sp"
+            android:textColor="#FFEC6363"/>
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
 </FrameLayout>

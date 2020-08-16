@@ -26,6 +26,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText mail;
     EditText confirmpassword;
     EditText address;
+    EditText phone;
     Button signup;
     private FirebaseAuth mAuth;
     DatabaseReference databaseReference;
@@ -41,6 +42,7 @@ public class SignupActivity extends AppCompatActivity {
         mail=(EditText) findViewById(R.id.mail);
         confirmpassword=(EditText) findViewById(R.id.confirmpassword);
         address=(EditText) findViewById(R.id.address);
+        phone=(EditText)findViewById(R.id.phone);
         signup = (Button) findViewById(R.id.signup);
 
         mAuth=FirebaseAuth.getInstance();
@@ -58,19 +60,7 @@ public class SignupActivity extends AppCompatActivity {
         final String password_string=password.getText().toString().trim();
         final String confirmpassword_string=confirmpassword.getText().toString().trim();
         final String address_string=address.getText().toString().trim();
-
-        if(TextUtils.isEmpty(mail_string)){
-            Toast.makeText(SignupActivity.this,"Please Enter Your Email",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if(TextUtils.isEmpty(password_string)){
-            Toast.makeText(SignupActivity.this,"Please Enter Your Password",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if(TextUtils.isEmpty(confirmpassword_string)){
-            Toast.makeText(SignupActivity.this,"Please Confirm Your Password",Toast.LENGTH_SHORT).show();
-            return;
-        }
+        final String phone_string=phone.getText().toString().trim();
 
         if(TextUtils.isEmpty(name_string)){
             Toast.makeText(SignupActivity.this,"Please Enter Your Name",Toast.LENGTH_SHORT).show();
@@ -82,10 +72,33 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
+        if(TextUtils.isEmpty(mail_string)){
+            Toast.makeText(SignupActivity.this,"Please Enter Your Email",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(phone_string)){
+            Toast.makeText(SignupActivity.this,"Please Enter Your Phone Number",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        if(TextUtils.isEmpty(password_string)){
+            Toast.makeText(SignupActivity.this,"Please Enter Your Password",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(confirmpassword_string)){
+            Toast.makeText(SignupActivity.this,"Please Confirm Your Password",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
         if(TextUtils.isEmpty(address_string)){
             Toast.makeText(SignupActivity.this,"Please Enter Your Address",Toast.LENGTH_SHORT).show();
             return;
         }
+
 
         if(password_string.length()<6){
             Toast.makeText(SignupActivity.this,"Password is too short",Toast.LENGTH_SHORT).show();
@@ -103,7 +116,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             if (task.isSuccessful()) {
 
-                                User user = new User(name_string,username_string,mail_string,address_string);
+                                User user = new User(name_string,username_string,mail_string,address_string,phone_string);
 
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

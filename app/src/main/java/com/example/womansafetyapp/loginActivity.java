@@ -96,7 +96,7 @@ public class loginActivity extends AppCompatActivity {
                                         UserInfo  userinfo = dataSnapshot1.getValue(UserInfo.class);
 
 
-                                        Intent intent= new Intent(loginActivity.this, TestActivity.class);
+                                        Intent intent= new Intent(loginActivity.this, MainActivity.class);
                                         intent.putExtra("NAME",userinfo.Name);
                                         intent.putExtra("USERNAME",userinfo.Username);
                                         intent.putExtra("EMAIL",userinfo.Mail);

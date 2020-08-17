@@ -27,11 +27,12 @@
         <activity
             android:name=".SignupActivity"
             android:theme="@style/AppFullScreenTheme" />
+        <!--
         <activity android:name=".TestActivity"
             android:theme="@style/AppFullScreenTheme"
 
             />
-
+        -->
         <activity
             android:name=".MainActivity"
             android:theme="@style/NoActionBar">

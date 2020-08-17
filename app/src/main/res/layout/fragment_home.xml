@@ -6,10 +6,43 @@
     tools:context=".home">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home section" />
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/emergencyButton"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="#FFEC6363"
+            android:text="EMERGENCY"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/xValue"
+            android:layout_below="@+id/emergencyButton"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:textSize="16pt" />
+
+        <TextView
+            android:id="@+id/yValue"
+            android:layout_below="@+id/xValue"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:textSize="16pt" />
+
+        <TextView
+            android:id="@+id/zValue"
+            android:layout_below="@+id/yValue"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:textSize="16pt" />
+    </RelativeLayout>
+
 
 
 </FrameLayout>

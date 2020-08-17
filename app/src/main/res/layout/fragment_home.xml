@@ -26,21 +26,24 @@
             android:layout_below="@+id/emergencyButton"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:textSize="16pt" />
+            android:textSize="16pt"
+            android:text="x"/>
 
         <TextView
             android:id="@+id/yValue"
             android:layout_below="@+id/xValue"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:textSize="16pt" />
+            android:textSize="16pt"
+            android:text="y"/>
 
         <TextView
             android:id="@+id/zValue"
             android:layout_below="@+id/yValue"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:textSize="16pt" />
+            android:textSize="16pt"
+            android:text="z"/>
     </RelativeLayout>
 
 

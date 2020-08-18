@@ -1,6 +1,7 @@
 package com.example.womansafetyapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -14,7 +15,11 @@ import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 
 /**
@@ -36,6 +41,8 @@ public class home extends Fragment implements SensorEventListener {
     private Vibrator vibrates;
 
     private float accellast,accelval,shake;
+    private Button emergency;
+    View view;
 
     public home() {
         // Required empty public constructor
@@ -47,7 +54,7 @@ public class home extends Fragment implements SensorEventListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
-
+        emergency=(Button)view.findViewById(R.id.emergencyButton);
         xval = (TextView) view.findViewById(R.id.xValue);
         yval = (TextView) view.findViewById(R.id.yValue);
         zval = (TextView) view.findViewById(R.id.zValue);

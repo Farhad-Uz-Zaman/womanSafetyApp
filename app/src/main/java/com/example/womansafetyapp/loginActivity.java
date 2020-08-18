@@ -77,59 +77,55 @@ public class loginActivity extends AppCompatActivity {
     private void userLogin( String email, String password)
     {
 
-        authenticate.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        authenticate.signInWithEmailAndPassword(email.trim(), password)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(loginActivity.this,"Logged In",Toast.LENGTH_SHORT).show();
 
-                            Toast.makeText(loginActivity.this,"Logged In",Toast.LENGTH_SHORT).show();
-
-                            ref.addValueEventListener(new ValueEventListener() {
+                        ref.addValueEventListener(new ValueEventListener() {
 
 
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
 
-                                        UserInfo  userinfo = dataSnapshot1.getValue(UserInfo.class);
-
-
-                                        Intent intent= new Intent(loginActivity.this, MainActivity.class);
-                                        intent.putExtra("NAME",userinfo.Name);
-                                        intent.putExtra("USERNAME",userinfo.Username);
-                                        intent.putExtra("EMAIL",userinfo.Mail);
-                                        intent.putExtra("PHONE",userinfo.Phone);
-                                        intent.putExtra("ADDRESS",userinfo.Address);
-                                        startActivity(intent);
-                                        finish();
+                                    UserInfo  userinfo = dataSnapshot1.getValue(UserInfo.class);
 
 
+                                    Intent intent= new Intent(loginActivity.this, MainActivity.class);
+                                    intent.putExtra("NAME",userinfo.Name);
+                                    intent.putExtra("USERNAME",userinfo.Username);
+                                    intent.putExtra("EMAIL",userinfo.Mail);
+                                    intent.putExtra("PHONE",userinfo.Phone);
+                                    intent.putExtra("ADDRESS",userinfo.Address);
+                                    startActivity(intent);
+                                    finish();
 
-                                    }
 
 
                                 }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                }
-                            });
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
-
-                                } else {
-
-                            Toast.makeText(loginActivity.this,"Loggin Failed",Toast.LENGTH_SHORT).show();
-
-                        }
-
+                            }
+                        });
 
                     }
                 });
+        authenticate.signInWithEmailAndPassword(email, password)
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(loginActivity.this,"Login failed",Toast.LENGTH_SHORT).show();
+                    }
+                })  ;
+
 
 
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ public class settings extends Fragment implements View.OnClickListener {
         view=inflater.inflate(R.layout.fragment_settings, container, false);
         signout=(Button)view.findViewById(R.id.signout);
         signout.setOnClickListener(this);
+
         return view;
     }
     @Override
@@ -43,10 +45,15 @@ public class settings extends Fragment implements View.OnClickListener {
         Toast.makeText(getActivity(),"Signed Out",Toast.LENGTH_SHORT).show();
         Intent intent= new Intent(getActivity(), loginActivity.class);
         startActivity(intent);
+        getActivity().finish();
+
+
         //finish();
 
 
     }
+
+
 
 
 

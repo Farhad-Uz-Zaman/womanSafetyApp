@@ -1,5 +1,6 @@
 package com.example.womansafetyapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -8,16 +9,19 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-
+import android.app.Activity;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -77,11 +81,44 @@ public class home extends Fragment implements SensorEventListener {
             accelAvail = false;
         }
 
+
+
+
+
         accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this,accel, SensorManager.SENSOR_DELAY_NORMAL);
 
+        emergency.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
 
+                Intent mediaint=new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+
+                //Intent mediaint=new Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE);
+
+                mediaint.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1080);
+                mediaint.putExtra(MediaStore.EXTRA_DURATION_LIMIT,10);
+                startActivityForResult(mediaint,1);
+
+            }
+        });
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode==Activity.RESULT_OK && requestCode==1)
+        {
+            AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+
+            VideoView videoVIew= new VideoView(getActivity());
+            videoVIew.setVideoURI(data.getData());
+
+            videoVIew.start();
+            builder.setView(videoVIew).show();
+        }
     }
 
     @Override

@@ -64,7 +64,7 @@ public class loginActivity extends AppCompatActivity {
 
 
 
-         signup = (Button) findViewById(R.id.signup);
+        signup = (Button) findViewById(R.id.signup);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,60 +77,68 @@ public class loginActivity extends AppCompatActivity {
     private void userLogin( String email, String password)
     {
 
-        authenticate.signInWithEmailAndPassword(email.trim(), password)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+        authenticate.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(loginActivity.this,"Logged In",Toast.LENGTH_SHORT).show();
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
 
-                        ref.addValueEventListener(new ValueEventListener() {
+                            Toast.makeText(loginActivity.this,"Logged In",Toast.LENGTH_SHORT).show();
 
-
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-
-                                    UserInfo  userinfo = dataSnapshot1.getValue(UserInfo.class);
+                            ref.addValueEventListener(new ValueEventListener() {
 
 
-                                    Intent intent= new Intent(loginActivity.this, MainActivity.class);
-                                    intent.putExtra("NAME",userinfo.Name);
-                                    intent.putExtra("USERNAME",userinfo.Username);
-                                    intent.putExtra("EMAIL",userinfo.Mail);
-                                    intent.putExtra("PHONE",userinfo.Phone);
-                                    intent.putExtra("ADDRESS",userinfo.Address);
-                                    startActivity(intent);
-                                    finish();
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                                    for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+
+                                        UserInfo  userinfo = dataSnapshot1.getValue(UserInfo.class);
+
+
+                                        Intent intent= new Intent(loginActivity.this, MainActivity.class);
+                                        intent.putExtra("NAME",userinfo.Name);
+                                        intent.putExtra("USERNAME",userinfo.Username);
+                                        intent.putExtra("EMAIL",userinfo.Mail);
+                                        intent.putExtra("PHONE",userinfo.Phone);
+                                        intent.putExtra("ADDRESS",userinfo.Address);
+                                        startActivity(intent);
+                                        finish();
+
+
+
+                                    }
 
 
                                 }
 
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
+                                }
+                            });
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        });
+
+
+                        } else {
+
+                            Toast.makeText(loginActivity.this,"Loggin Failed",Toast.LENGTH_SHORT).show();
+
+                        }
+
 
                     }
                 });
-        authenticate.signInWithEmailAndPassword(email, password)
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(loginActivity.this,"Login failed",Toast.LENGTH_SHORT).show();
-                    }
-                })  ;
-
 
 
 
 
     }
+
+
+
+
 
     private boolean getData()
     {

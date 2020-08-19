@@ -3,6 +3,7 @@ package com.example.womansafetyapp;
 public class User {
 
    public String Name,Username,Mail,Address,Phone;
+   public boolean loginState=false;
 
    public User(){
 

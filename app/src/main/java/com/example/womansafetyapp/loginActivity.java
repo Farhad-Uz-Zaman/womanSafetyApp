@@ -101,6 +101,7 @@ public class loginActivity extends AppCompatActivity {
                                         intent.putExtra("USERNAME",userinfo.Username);
                                         intent.putExtra("EMAIL",userinfo.Mail);
                                         intent.putExtra("PHONE",userinfo.Phone);
+                                        intent.putExtra("CONTACT",userinfo.Contact);
                                         intent.putExtra("ADDRESS",userinfo.Address);
                                         startActivity(intent);
                                         finish();

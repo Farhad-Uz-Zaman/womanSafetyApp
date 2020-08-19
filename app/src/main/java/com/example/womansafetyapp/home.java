@@ -1,8 +1,10 @@
 package com.example.womansafetyapp;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,10 +13,12 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Vibrator;
 import android.provider.MediaStore;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +48,10 @@ public class home extends Fragment implements SensorEventListener {
 
     private Vibrator vibrates;
 
+
+    private String contact_string;
+    private String msg;
+
     private float accellast,accelval,shake;
     private Button emergency;
     View view;
@@ -62,6 +70,7 @@ public class home extends Fragment implements SensorEventListener {
         xval = (TextView) view.findViewById(R.id.xValue);
         yval = (TextView) view.findViewById(R.id.yValue);
         zval = (TextView) view.findViewById(R.id.zValue);
+
 
         vibrates = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -141,7 +150,32 @@ public class home extends Fragment implements SensorEventListener {
             if ((xDiff > threshold && yDiff > threshold) || (yDiff > threshold && zDiff > threshold) || (xDiff > threshold && zDiff > threshold)){
                 //vibrates.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                 vibrates.vibrate(1000);
-            //    mm.start();
+
+
+
+
+
+
+
+                Bundle bundle= getActivity().getIntent().getExtras();
+                if(bundle!=null){
+
+
+                    contact_string=bundle.getString("CONTACT");
+
+
+                }
+
+                msg="Safety app test";
+
+                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS,Manifest.permission.READ_SMS}, PackageManager.PERMISSION_GRANTED);
+
+                SmsManager myManager = SmsManager.getDefault();
+                myManager.sendTextMessage(contact_string,null,msg,null,null);
+
+
+
+
             }
 
 

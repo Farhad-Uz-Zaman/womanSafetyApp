@@ -20,7 +20,8 @@ public class profile extends Fragment {
     TextView mail;
     TextView phone;
     TextView address;
-    String name_string,username_string,mail_string,phone_string,address_string;
+    TextView contact;
+    String name_string,username_string,mail_string,phone_string,contact_string,address_string;
 
     public profile() {
         // Required empty public constructor
@@ -38,6 +39,7 @@ public class profile extends Fragment {
         username=(TextView)view.findViewById(R.id.username);
         mail=(TextView)view.findViewById(R.id.mail);
         phone=(TextView)view.findViewById(R.id.phone);
+        contact=(TextView)view.findViewById(R.id.contact);
         address=(TextView)view.findViewById(R.id.address);
 
 
@@ -47,6 +49,7 @@ public class profile extends Fragment {
             username_string = bundle.getString("USERNAME");
             mail_string = bundle.getString("EMAIL");
             phone_string = bundle.getString("PHONE");
+            contact_string=bundle.getString("CONTACT");
             address_string = bundle.getString("ADDRESS");
 
         }

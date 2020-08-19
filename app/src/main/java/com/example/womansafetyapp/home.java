@@ -103,13 +103,34 @@ public class home extends Fragment implements SensorEventListener {
             public void onClick(View v)
             {
 
-                Intent mediaint=new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
-                //Intent mediaint=new Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE);
 
+                Bundle bundle= getActivity().getIntent().getExtras();
+                if(bundle!=null){
+
+
+                    contact_string=bundle.getString("CONTACT");
+
+
+                }
+
+
+
+                msg="Safety app test";
+
+                ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS,Manifest.permission.READ_SMS}, PackageManager.PERMISSION_GRANTED);
+
+                SmsManager myManager = SmsManager.getDefault();
+                myManager.sendTextMessage(contact_string,null,msg,null,null);
+
+
+
+
+
+                /*Intent mediaint=new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                 mediaint.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1080);
                 mediaint.putExtra(MediaStore.EXTRA_DURATION_LIMIT,10);
-                startActivityForResult(mediaint,1);
+                startActivityForResult(mediaint,1);*/
 
             }
         });
@@ -155,7 +176,7 @@ public class home extends Fragment implements SensorEventListener {
 
 
 
-
+/*
 
                 Bundle bundle= getActivity().getIntent().getExtras();
                 if(bundle!=null){
@@ -166,6 +187,8 @@ public class home extends Fragment implements SensorEventListener {
 
                 }
 
+
+
                 msg="Safety app test";
 
                 ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.SEND_SMS,Manifest.permission.READ_SMS}, PackageManager.PERMISSION_GRANTED);
@@ -174,7 +197,7 @@ public class home extends Fragment implements SensorEventListener {
                 myManager.sendTextMessage(contact_string,null,msg,null,null);
 
 
-
+*/
 
             }
 

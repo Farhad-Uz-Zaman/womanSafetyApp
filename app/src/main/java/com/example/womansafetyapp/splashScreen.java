@@ -10,7 +10,7 @@ public class splashScreen extends AppCompatActivity {
 
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 2000; //splash screen will be shown for 2 seconds
+    private final int SPLASH_DISPLAY_LENGTH = 3000; //splash screen will be shown for 2 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

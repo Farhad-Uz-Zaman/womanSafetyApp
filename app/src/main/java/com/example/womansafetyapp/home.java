@@ -47,6 +47,8 @@ public class home extends Fragment implements SensorEventListener {
     private float threshold = 9.66f;
     int state=0;
     private Vibrator vibrates;
+    String contact="+8801993263705";
+    String msg="Safety app test";
 
 
 
@@ -160,9 +162,12 @@ public class home extends Fragment implements SensorEventListener {
                 //vibrates.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                 vibrates.vibrate(1000);
 
-                Intent intent = new Intent(getActivity(),SmsTest.class);
+             /*   Intent intent = new Intent(getActivity(),SmsTest.class);
                 intent.putExtra("some","some text");
-                startActivity(intent);
+                startActivity(intent); */
+
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(contact,null,msg,null,null);
 
 
 

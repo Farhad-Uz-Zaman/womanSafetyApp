@@ -20,7 +20,7 @@ String msg,contact;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_test);
 
-        contact="+8801676546443";
+        contact="+8801993263705";
         msg="Safety app test";
 
         int checkPermission = ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS);

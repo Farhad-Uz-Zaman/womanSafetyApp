@@ -107,7 +107,9 @@ public class home extends Fragment implements SensorEventListener {
 
 
 
-
+                //Intent intent = new Intent(getActivity(),SmsTest.class);
+                //intent.putExtra("some","some text");
+                //startActivity(intent);
 
 
 
@@ -158,13 +160,17 @@ public class home extends Fragment implements SensorEventListener {
                 //vibrates.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                 vibrates.vibrate(1000);
 
-
+                Intent intent = new Intent(getActivity(),SmsTest.class);
+                intent.putExtra("some","some text");
+                startActivity(intent);
 
 
 
 
 
             }
+
+
 
 
         }

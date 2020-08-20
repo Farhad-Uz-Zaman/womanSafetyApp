@@ -10,12 +10,14 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.app.Activity;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.telephony.SmsManager;
@@ -28,6 +30,10 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
 
 /**
@@ -51,7 +57,13 @@ public class home extends Fragment implements SensorEventListener {
     String msg="Safety app test";
 
 
+    private MediaRecorder record;
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     private float accellast,accelval,shake;
     private Button emergency;
@@ -61,6 +73,19 @@ public class home extends Fragment implements SensorEventListener {
         // Required empty public constructor
     }
 
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int getpermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (getpermission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,10 +146,74 @@ public class home extends Fragment implements SensorEventListener {
                 mediaint.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1080);
                 mediaint.putExtra(MediaStore.EXTRA_DURATION_LIMIT,10);
                 startActivityForResult(mediaint,1);
-
+                recordAudio();
             }
         });
         return view;
+    }
+    public void recordAudio()
+    {
+
+        emergency.setEnabled(false);
+        String filePath= "/storage/emulated/0";
+        File audiofiledir= new File(filePath);
+
+        Long date=new Date().getTime();
+        Date current_time = new Date(Long.valueOf(date));
+
+
+
+
+
+
+
+        record=new MediaRecorder();
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.RECORD_AUDIO}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+
+        verifyStoragePermissions(getActivity());
+
+
+        record.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+
+        record.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
+        record.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        if (!audiofiledir.exists()){
+            audiofiledir.mkdirs();
+        }
+
+        String audiofilename="/storage/emulated/0"+"/"+current_time+".amr";
+        record.setOutputFile(audiofilename);
+
+        try {
+            // ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.RECORD_AUDIO}, PackageManager.PERMISSION_GRANTED);
+            record.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+            emergency.setEnabled(true);
+            Toast.makeText(getActivity(),"couldn't create audio"+e.getMessage(),Toast.LENGTH_SHORT).show();
+            return;
+        }
+        record.start();
+        Toast.makeText(getActivity(),"start"+audiofilename,Toast.LENGTH_SHORT).show();
+        CountDownTimer audioduration = new CountDownTimer(30000, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+
+
+            public void onFinish() {
+                emergency.setEnabled(true);
+                Toast.makeText(getActivity(), "30 seconds are up ", Toast.LENGTH_LONG).show();
+                record.stop();
+                record.reset();
+                record.release();
+                record=null;
+
+
+            }};audioduration.start();
+
     }
 
     @Override

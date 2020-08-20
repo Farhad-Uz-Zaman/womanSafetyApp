@@ -45,7 +45,7 @@ public class home extends Fragment implements SensorEventListener {
     private float xlast,ylast,zlast;
     private float xDiff,yDiff,zDiff;
     private float threshold = 9.66f;
-
+    int state=0;
     private Vibrator vibrates;
 
 
@@ -69,6 +69,9 @@ public class home extends Fragment implements SensorEventListener {
         xval = (TextView) view.findViewById(R.id.xValue);
         yval = (TextView) view.findViewById(R.id.yValue);
         zval = (TextView) view.findViewById(R.id.zValue);
+
+
+
 
 
         vibrates = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
@@ -154,16 +157,6 @@ public class home extends Fragment implements SensorEventListener {
             if ((xDiff > threshold && yDiff > threshold) || (yDiff > threshold && zDiff > threshold) || (xDiff > threshold && zDiff > threshold)){
                 //vibrates.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                 vibrates.vibrate(1000);
-
-
-
-
-
-                Intent intent= new Intent(getActivity(), SmsTest.class);
-
-                startActivity(intent);
-                getActivity().finish();
-
 
 
 

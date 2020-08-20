@@ -10,21 +10,20 @@ import android.telephony.SmsManager;
 
 public class SmsTest extends AppCompatActivity {
 
-    private String contact_string,msg;
+String msg,contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_test);
 
-        contact_string="+8801676546443";
+        contact="+8801676546443";
         msg="Safety app test";
 
         ActivityCompat.requestPermissions(SmsTest.this,new String[]{Manifest.permission.SEND_SMS,Manifest.permission.READ_SMS}, PackageManager.PERMISSION_GRANTED);
 
         SmsManager myManager = SmsManager.getDefault();
-        myManager.sendTextMessage(contact_string,null,msg,null,null);
-
+        myManager.sendTextMessage(contact,null,msg,null,null);
 
 
 

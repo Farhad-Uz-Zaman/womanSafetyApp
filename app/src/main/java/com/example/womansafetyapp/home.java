@@ -13,6 +13,8 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.app.Activity;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -30,6 +32,11 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,8 +60,10 @@ public class home extends Fragment implements SensorEventListener {
     private float threshold = 9.66f;
     int state=0;
     private Vibrator vibrates;
-    String contact="+8801993263705";
+    private DatabaseReference ref;
+    String contact="+8801973376517";
     String msg="Safety app test";
+    String email;
 
 
     private MediaRecorder record;
@@ -97,7 +106,16 @@ public class home extends Fragment implements SensorEventListener {
         yval = (TextView) view.findViewById(R.id.yValue);
         zval = (TextView) view.findViewById(R.id.zValue);
 
+        ref= FirebaseDatabase.getInstance().getReference().child("Contacts");
 
+
+        Bundle bundle= getActivity().getIntent().getExtras();
+        if(bundle!=null){
+
+            email = bundle.getString("EMAIL");
+
+
+        }
 
 
 
@@ -251,12 +269,55 @@ public class home extends Fragment implements SensorEventListener {
                 //vibrates.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                 vibrates.vibrate(1000);
 
-             /*   Intent intent = new Intent(getActivity(),SmsTest.class);
-                intent.putExtra("some","some text");
-                startActivity(intent); */
 
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(contact,null,msg,null,null);
+
+
+
+                ref.addValueEventListener(new ValueEventListener() {
+
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+
+                            ContactInfo  contactinfo = dataSnapshot1.getValue(ContactInfo.class);
+
+
+
+                              if(email.equals(contactinfo.Mail)) {
+
+                                  SmsManager smsManager1 = SmsManager.getDefault();
+                                  smsManager1.sendTextMessage(contactinfo.cont1, null, msg, null, null);
+                                  SmsManager smsManager2 = SmsManager.getDefault();
+                                  smsManager2.sendTextMessage(contactinfo.cont2, null, msg, null, null);
+                                  SmsManager smsManager3 = SmsManager.getDefault();
+                                  smsManager3.sendTextMessage(contactinfo.cont3, null, msg, null, null);
+
+                              }
+
+
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
 
 
 

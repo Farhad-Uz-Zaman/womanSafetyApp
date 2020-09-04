@@ -123,7 +123,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             if (task.isSuccessful()) {
 
-                                User user = new User(name_string,username_string,mail_string,address_string,phone_string,emcontact_string);
+                              final  User user = new User(name_string,username_string,mail_string,address_string,phone_string,emcontact_string);
 
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -133,7 +133,15 @@ public class SignupActivity extends AppCompatActivity {
 
                                         if (task.isSuccessful()) {
                                             Toast.makeText(SignupActivity.this,"Registration Complete", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                                            intent.putExtra("NAME", user.Name);
+                                            intent.putExtra("USERNAME", user.Username);
+                                            intent.putExtra("EMAIL", user.Mail);
+                                            intent.putExtra("PHONE", user.Phone);
+                                            intent.putExtra("CONTACT", user.Contact);
+                                            intent.putExtra("ADDRESS", user.Address);
+
+                                            startActivity(intent);
                                             finish();
 
                                         } else {

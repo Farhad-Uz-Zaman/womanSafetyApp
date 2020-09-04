@@ -74,7 +74,7 @@ public class loginActivity extends AppCompatActivity {
             }
         });
     }
-    private void userLogin( String email, String password)
+    private void userLogin(final String email,final String password)
     {
 
         authenticate.signInWithEmailAndPassword(email, password)
@@ -95,17 +95,20 @@ public class loginActivity extends AppCompatActivity {
 
                                         UserInfo  userinfo = dataSnapshot1.getValue(UserInfo.class);
 
+                                        if(email.equals(userinfo.Mail)) {
 
-                                        Intent intent= new Intent(loginActivity.this, MainActivity.class);
-                                        intent.putExtra("NAME",userinfo.Name);
-                                        intent.putExtra("USERNAME",userinfo.Username);
-                                        intent.putExtra("EMAIL",userinfo.Mail);
-                                        intent.putExtra("PHONE",userinfo.Phone);
-                                        intent.putExtra("CONTACT",userinfo.Contact);
-                                        intent.putExtra("ADDRESS",userinfo.Address);
-                                        startActivity(intent);
-                                        finish();
+                                            Intent intent = new Intent(loginActivity.this, MainActivity.class);
+                                            intent.putExtra("NAME", userinfo.Name);
+                                            intent.putExtra("USERNAME", userinfo.Username);
+                                            intent.putExtra("EMAIL", userinfo.Mail);
+                                            intent.putExtra("PHONE", userinfo.Phone);
+                                            intent.putExtra("CONTACT", userinfo.Contact);
+                                            intent.putExtra("ADDRESS", userinfo.Address);
+                                            startActivity(intent);
+                                            finish();
 
+
+                                        }
 
 
                                     }

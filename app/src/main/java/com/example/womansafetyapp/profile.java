@@ -39,7 +39,7 @@ public class profile extends Fragment {
         username=(TextView)view.findViewById(R.id.username);
         mail=(TextView)view.findViewById(R.id.mail);
         phone=(TextView)view.findViewById(R.id.phone);
-        contact=(TextView)view.findViewById(R.id.contact);
+        //contact=(TextView)view.findViewById(R.id.contact);
         address=(TextView)view.findViewById(R.id.address);
 
 

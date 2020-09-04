@@ -13,10 +13,15 @@
         <item android:id="@+id/settings"
             android:icon="@drawable/ic_settings"
             android:title="Settings"/>
-
+        <!--
         <item android:id="@+id/contact"
             android:icon="@drawable/ic_contacts"
             android:title="Contacts"/>
+        -->
+
+        <item android:id="@+id/emergency_contact"
+            android:icon="@drawable/ic_contacts"
+            android:title="Emergency Contacts"/>
 
         <item android:id="@+id/signout"
             android:icon="@drawable/ic_logout"

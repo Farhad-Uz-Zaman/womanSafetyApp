@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 
 public class settings extends Fragment implements View.OnClickListener {
-    private Button signout;
+
     View view;
 
     public settings() {
@@ -34,18 +34,12 @@ public class settings extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_settings, container, false);
-        signout=(Button)view.findViewById(R.id.signout);
-        signout.setOnClickListener(this);
 
         return view;
     }
     @Override
     public void onClick(View v) {
-        FirebaseAuth.getInstance().signOut();
-        Toast.makeText(getActivity(),"Signed Out",Toast.LENGTH_SHORT).show();
-        Intent intent= new Intent(getActivity(), loginActivity.class);
-        startActivity(intent);
-        getActivity().finish();
+
 
 
         //finish();

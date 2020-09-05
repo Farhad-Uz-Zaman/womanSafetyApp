@@ -9,8 +9,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -64,6 +67,8 @@ public class home extends Fragment implements SensorEventListener {
     String contact="+8801973376517";
     String msg="Safety app test";
     String email;
+
+
 
 
     private MediaRecorder record;
@@ -160,10 +165,26 @@ public class home extends Fragment implements SensorEventListener {
 
 
 
+
                 Intent mediaint=new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                 mediaint.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1080);
                 mediaint.putExtra(MediaStore.EXTRA_DURATION_LIMIT,10);
+
+
                 startActivityForResult(mediaint,1);
+                CameraManager camManager = (CameraManager) getActivity().getSystemService(Context.CAMERA_SERVICE);
+                String cameraId; // Usually front camera is at 0 position.
+
+                {
+                    try {
+                        cameraId = camManager.getCameraIdList()[0];
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            camManager.setTorchMode(cameraId, true);
+                        }
+                    } catch (CameraAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
                 recordAudio();
             }
         });

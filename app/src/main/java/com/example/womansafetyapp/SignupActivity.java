@@ -27,7 +27,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText confirmpassword;
     EditText address;
     EditText phone;
-    EditText emcontact;
+
     Button signup;
     private FirebaseAuth mAuth;
     DatabaseReference databaseReference;
@@ -44,7 +44,7 @@ public class SignupActivity extends AppCompatActivity {
         confirmpassword=(EditText) findViewById(R.id.confirmpassword);
         address=(EditText) findViewById(R.id.address);
         phone=(EditText)findViewById(R.id.phone);
-        emcontact=(EditText)findViewById(R.id.emcontact);
+
         signup = (Button) findViewById(R.id.signup);
 
         mAuth=FirebaseAuth.getInstance();
@@ -63,7 +63,7 @@ public class SignupActivity extends AppCompatActivity {
         final String confirmpassword_string=confirmpassword.getText().toString().trim();
         final String address_string=address.getText().toString().trim();
         final String phone_string=phone.getText().toString().trim();
-        final String emcontact_string=emcontact.getText().toString().trim();
+
 
         if(TextUtils.isEmpty(name_string)){
             Toast.makeText(SignupActivity.this,"Please Enter Your Name",Toast.LENGTH_SHORT).show();
@@ -82,10 +82,6 @@ public class SignupActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(phone_string)){
             Toast.makeText(SignupActivity.this,"Please Enter Your Phone Number",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if(TextUtils.isEmpty(emcontact_string)){
-            Toast.makeText(SignupActivity.this,"Please Enter Your Emergency Contact",Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -123,7 +119,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             if (task.isSuccessful()) {
 
-                              final  User user = new User(name_string,username_string,mail_string,address_string,phone_string,emcontact_string);
+                              final  User user = new User(name_string,username_string,mail_string,address_string,phone_string);
 
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -138,7 +134,6 @@ public class SignupActivity extends AppCompatActivity {
                                             intent.putExtra("USERNAME", user.Username);
                                             intent.putExtra("EMAIL", user.Mail);
                                             intent.putExtra("PHONE", user.Phone);
-                                            intent.putExtra("CONTACT", user.Contact);
                                             intent.putExtra("ADDRESS", user.Address);
 
                                             startActivity(intent);

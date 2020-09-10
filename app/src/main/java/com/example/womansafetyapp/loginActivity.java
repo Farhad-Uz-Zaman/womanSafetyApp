@@ -39,8 +39,6 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-
-
         email=(EditText)findViewById(R.id.email);
         passWord=(EditText)findViewById(R.id.Password);
         login = (Button) findViewById(R.id.login);
@@ -102,7 +100,6 @@ public class loginActivity extends AppCompatActivity {
                                             intent.putExtra("USERNAME", userinfo.Username);
                                             intent.putExtra("EMAIL", userinfo.Mail);
                                             intent.putExtra("PHONE", userinfo.Phone);
-                                            intent.putExtra("CONTACT", userinfo.Contact);
                                             intent.putExtra("ADDRESS", userinfo.Address);
                                             startActivity(intent);
                                             finish();

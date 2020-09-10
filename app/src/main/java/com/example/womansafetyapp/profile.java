@@ -46,9 +46,8 @@ public class profile extends Fragment {
     TextView mail;
     TextView phone;
     TextView address;
-    TextView contact;
     ImageView image;
-    String name_string,username_string,mail_string,phone_string,contact_string,address_string;
+    String name_string,username_string,mail_string,phone_string,address_string;
     public final int TAKE_IMAGE_CODE= 10001;
 
     public profile() {
@@ -67,7 +66,6 @@ public class profile extends Fragment {
         username=(TextView)view.findViewById(R.id.username);
         mail=(TextView)view.findViewById(R.id.mail);
         phone=(TextView)view.findViewById(R.id.phone);
-        //contact=(TextView)view.findViewById(R.id.contact);
         address=(TextView)view.findViewById(R.id.address);
         image=(ImageView)view.findViewById(R.id.image);
 
@@ -82,13 +80,13 @@ public class profile extends Fragment {
 
         }
 
+
         Bundle bundle= getActivity().getIntent().getExtras();
         if(bundle!=null){
             name_string = bundle.getString("NAME");
             username_string = bundle.getString("USERNAME");
             mail_string = bundle.getString("EMAIL");
             phone_string = bundle.getString("PHONE");
-            contact_string=bundle.getString("CONTACT");
             address_string = bundle.getString("ADDRESS");
 
         }

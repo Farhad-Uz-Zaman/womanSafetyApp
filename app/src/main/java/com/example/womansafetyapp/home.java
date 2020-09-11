@@ -1,6 +1,7 @@
 package com.example.womansafetyapp;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Build;
@@ -49,26 +53,27 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class home extends Fragment implements SensorEventListener {
+public class home extends Fragment implements SensorEventListener, LocationListener {
 
     private static final String tag = "home";
-    TextView xval,yval,zval;
+    TextView xval, yval, zval;
     private SensorManager sensorManager;
     private Sensor accel;
-    private boolean accelAvail , isitnotfirsttime = false;
+    private boolean accelAvail, isitnotfirsttime = false;
 
-    private float xcurrent,ycurrent,zcurrent;
-    private float xlast,ylast,zlast;
-    private float xDiff,yDiff,zDiff;
+    private float xcurrent, ycurrent, zcurrent;
+    private float xlast, ylast, zlast;
+    private float xDiff, yDiff, zDiff;
     private float threshold = 9.66f;
-    int state=0;
+    int state = 0;
     private Vibrator vibrates;
     private DatabaseReference ref;
-    String contact="+8801973376517";
-    String msg="Safety app test";
+    String contact = "+8801973376517";
     String email;
+    double lattitude, longitude;
+    String msg = "I am in danger.Latitude: "+Double.toString(lattitude)+" Longitude: "+Double.toString(longitude);
 
-
+    LocationManager locationManager;
 
 
     private MediaRecorder record;
@@ -79,7 +84,7 @@ public class home extends Fragment implements SensorEventListener {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
-    private float accellast,accelval,shake;
+    private float accellast, accelval, shake;
     private Button emergency;
     View view;
 
@@ -105,11 +110,22 @@ public class home extends Fragment implements SensorEventListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_home, container, false);
-        emergency=(Button)view.findViewById(R.id.emergencyButton);
+
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        emergency = (Button) view.findViewById(R.id.emergencyButton);
         xval = (TextView) view.findViewById(R.id.xValue);
         yval = (TextView) view.findViewById(R.id.yValue);
         zval = (TextView) view.findViewById(R.id.zValue);
+          locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+
+
+        @SuppressLint("MissingPermission") Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
+       onLocationChanged(location);
+
+
+
+
 
         ref= FirebaseDatabase.getInstance().getReference().child("Contacts");
 
@@ -138,7 +154,7 @@ public class home extends Fragment implements SensorEventListener {
             accelAvail = true;
         }
         else {
-            xval.setText("not found");
+           // xval.setText("not found");
             accelAvail = false;
         }
 
@@ -273,9 +289,9 @@ public class home extends Fragment implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         // MediaPlayer mm = MediaPlayer.create(this, R.raw.buzzer);
 
-        xval.setText("X : " +event.values[0]);
-        yval.setText("Y : " +event.values[1]);
-        zval.setText("Z : " +event.values[2]);
+       // xval.setText("X : " +event.values[0]);
+      // yval.setText("Y : " +event.values[1]);
+      // zval.setText("Z : " +event.values[2]);
 
         xcurrent = event.values[0];
         ycurrent = event.values[1];
@@ -363,4 +379,28 @@ public class home extends Fragment implements SensorEventListener {
     }
 
 
+    @Override
+    public void onLocationChanged(Location location) {
+         longitude=location.getLongitude();
+         lattitude=location.getLatitude();
+       zval.setText("Longitude: "+longitude+"\n") ;
+        yval.setText("Lattitude: "+lattitude+"\n") ;
+
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }

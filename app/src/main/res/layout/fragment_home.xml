@@ -27,7 +27,7 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:textSize="16pt"
-            android:text="x"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/yValue"
@@ -35,7 +35,7 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:textSize="16pt"
-            android:text="y"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/zValue"
@@ -43,7 +43,7 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:textSize="16pt"
-            android:text="z"/>
+            android:text=""/>
     </RelativeLayout>
 
 

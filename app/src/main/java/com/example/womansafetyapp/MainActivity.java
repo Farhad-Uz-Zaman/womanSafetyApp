@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this,"Signed Out",Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(this, loginActivity.class);
                 startActivity(intent);
-                //this.finish();
+                this.finish();
                 break;
 
         }

@@ -16,7 +16,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="#FFEC6363"
+            android:background="@drawable/login_button_bg"
             android:text="EMERGENCY"
             android:textColor="#FFFFFF"
             android:textSize="20dp"/>

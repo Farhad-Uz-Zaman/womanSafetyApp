@@ -9,6 +9,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:gravity="bottom">
     <ImageView
+        android:id="@+id/image_drawer"
         android:layout_height="50dp"
         android:layout_width="50dp"
         android:src="@drawable/ic_dp"

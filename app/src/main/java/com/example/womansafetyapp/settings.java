@@ -25,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * A simple {@link Fragment} subclass.
  */
 
-public class settings extends Fragment implements View.OnClickListener {
+public class settings extends Fragment {
 
     View view;
 
@@ -49,7 +49,7 @@ public class settings extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_settings, container, false);
-        getActivity().setTitle("Settings");
+
 
 
         name=(EditText) view.findViewById(R.id.name);
@@ -75,29 +75,64 @@ public class settings extends Fragment implements View.OnClickListener {
         phone.setText(phone_string);
         address.setText(address_string);
 
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getActivity(),"Updated Successfully",Toast.LENGTH_SHORT).show();
+
+                if(!name_string.equals(name.getText().toString())||!username_string.equals(username.getText().toString())||!phone_string.equals(phone.getText().toString())||!address_string.equals(address.getText().toString())){
+
+
+
+                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    reference.child(uid).child("Name").setValue(name.getText().toString());
+                    reference.child(uid).child("Username").setValue(username.getText().toString());
+                    reference.child(uid).child("Phone").setValue(phone.getText().toString());
+                    reference.child(uid).child("Address").setValue(address.getText().toString());
+
+                    name_string=name.getText().toString();
+                    username_string=username.getText().toString();
+                    phone_string=phone.getText().toString();
+                    address_string=address.getText().toString();
+
+                    Toast.makeText(getActivity(),"Updated Successfully",Toast.LENGTH_SHORT).show();
+
+
+
+
+                }
+
+                else{
+                    Toast.makeText(getActivity(),"Data is same",Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+
+
+
+
+            }
+        });
+
+
+
 
 
 
         return view;
     }
-    @Override
-    public void onClick(View v) {
 
-
-
-        //finish();
-
-
-    }
-
-
+/*
 public void Update(View v){
 
 
         if(isDataChanged()){
 
             Toast.makeText(getActivity(),"Updated Successfully",Toast.LENGTH_SHORT).show();
-            
+
         }
         else{
 
@@ -106,9 +141,13 @@ public void Update(View v){
         }
 
 
+
+
+
+
 }
 
-    private boolean isDataChanged() {
+private boolean isDataChanged() {
 
         if(!name_string.equals(name.getText().toString())||!username_string.equals(username.getText().toString())||!phone_string.equals(phone.getText().toString())||!address_string.equals(address.getText().toString())){
 
@@ -136,7 +175,7 @@ public void Update(View v){
         }
 
 
-    }
+    } */
 
 
 }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".contact">
 
     <!-- TODO: Update blank fragment layout -->
@@ -38,6 +39,7 @@
             android:layout_toEndOf="@+id/contact1"
             android:layout_marginRight="40dp"
             android:hint="Phone number"
+            android:inputType="number"
             android:textSize="18sp"
             android:layout_marginLeft="40dp"
             android:textStyle="bold"

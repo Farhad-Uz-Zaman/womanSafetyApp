@@ -112,6 +112,7 @@ public class home extends Fragment implements SensorEventListener, LocationListe
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        getActivity().setTitle("Woman Safety App");
         emergency = (Button) view.findViewById(R.id.emergencyButton);
         xval = (TextView) view.findViewById(R.id.xValue);
         yval = (TextView) view.findViewById(R.id.yValue);

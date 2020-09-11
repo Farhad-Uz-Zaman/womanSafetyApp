@@ -38,6 +38,7 @@ public class reportBug extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_report_bug, container, false);
+        getActivity().setTitle("Report Bug");
 
         // Inflate the layout for this fragment
 

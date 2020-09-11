@@ -75,6 +75,7 @@ public class emergency_contact extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_emergency_contact, container, false);
+        getActivity().setTitle("Emergency Contacts");
 
         save = (Button) view.findViewById(R.id.save);
         contact1 = view.findViewById(R.id.contact1);

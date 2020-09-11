@@ -39,6 +39,7 @@ public class contact extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
+        getActivity().setTitle("Contact");
 
 
         save = (Button) view.findViewById(R.id.save);

@@ -49,7 +49,7 @@ public class settings extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_settings, container, false);
-
+        getActivity().setTitle("Settings");
 
 
         name=(EditText) view.findViewById(R.id.name);

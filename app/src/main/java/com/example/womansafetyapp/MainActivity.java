@@ -11,15 +11,24 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , BottomNavigationView.OnNavigationItemSelectedListener {
 
 
     private DrawerLayout navdraw;
+    FirebaseUser user;
+    FirebaseAuth fAuth;
+    String uname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +45,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this,navdraw,tb,R.string.navigationDrawerOpen,R.string.navigationDrawerClose);
         navdraw.addDrawerListener(toggle);
         toggle.syncState();
+
+        //for nav drawer header
+        Bundle bundle= getIntent().getExtras();
+        if(bundle!=null){
+            uname = bundle.getString("NAME");
+        }
+        fAuth = FirebaseAuth.getInstance();
+        user = fAuth.getCurrentUser();
+        View header = navView.getHeaderView(0);
+        TextView userName = header.findViewById(R.id.user_name_drawer);
+        TextView userMail = header.findViewById(R.id.user_mail_drawer);
+        ImageView userImage = header.findViewById(R.id.image_drawer);
+
+        userName.setText(uname);
+        userMail.setText(user.getEmail());
+
+        if(user.getPhotoUrl()!=null){
+            //Glide.with(this).load(user.getPhotoUrl()).into(userImage);
+        }
+
 
         // for nav.drawer fragments
         navView.setNavigationItemSelectedListener(this);

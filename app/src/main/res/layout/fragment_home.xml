@@ -16,34 +16,53 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/login_button_bg"
+            android:background="@drawable/image_container"
             android:text="EMERGENCY"
             android:textColor="#FFFFFF"
             android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/xValue"
-            android:layout_below="@+id/emergencyButton"
+            android:layout_below="@+id/desr"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:textSize="16pt"
-            android:text=""/>
+            android:textSize="6pt"
+            android:text=""
+            android:gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/yValue"
             android:layout_below="@+id/xValue"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:textSize="16pt"
-            android:text=""/>
+            android:textSize="6pt"
+            android:text=""
+            android:gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/zValue"
             android:layout_below="@+id/yValue"
             android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:textSize="16pt"
-            android:text=""/>
+            android:textSize="6pt"
+            android:text=""
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/desr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emergencyButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:minLines="1"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine"
+            android:gravity="center_horizontal"
+            android:text="Shake the phone while in danger and press emergency button asap."
+            android:textSize="19sp"
+            android:textColor="#505050"/>
     </RelativeLayout>
 
 

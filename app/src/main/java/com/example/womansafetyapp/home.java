@@ -71,7 +71,7 @@ public class home extends Fragment implements SensorEventListener, LocationListe
     String contact = "+8801973376517";
     String email;
     double lattitude, longitude;
-    String msg = "I am in danger.Latitude: "+Double.toString(lattitude)+" Longitude: "+Double.toString(longitude);
+   // String msg = "I am in danger.Latitude: "+Double.toString(lattitude)+" Longitude: "+Double.toString(longitude);
 
     LocationManager locationManager;
 
@@ -324,6 +324,8 @@ public class home extends Fragment implements SensorEventListener, LocationListe
 
 
                               if(email.equals(contactinfo.Mail)) {
+
+                                  String msg = "I am in danger.Latitude: "+Double.toString(lattitude)+" Longitude: "+Double.toString(longitude);
 
                                   SmsManager smsManager1 = SmsManager.getDefault();
                                   smsManager1.sendTextMessage(contactinfo.cont1, null, msg, null, null);

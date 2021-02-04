@@ -73,7 +73,7 @@ public class home extends Fragment implements SensorEventListener, LocationListe
     double lattitude, longitude;
    // String msg = "I am in danger.Latitude: "+Double.toString(lattitude)+" Longitude: "+Double.toString(longitude);
 
-    LocationManager locationManager;
+    LocationManager locationManager,lm;
 
 
     private MediaRecorder record;
